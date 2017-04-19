@@ -48,4 +48,14 @@ public class LoginServiceImpl implements LoginService {
 		return null;
 	}
 
+	@Override
+	public String addStuInfo(StudentBean stu) {
+		return null;
+	}
+
+	@Override
+	public String setStuInfo(StudentBean stu) {
+		return null;
+	}
+
 }

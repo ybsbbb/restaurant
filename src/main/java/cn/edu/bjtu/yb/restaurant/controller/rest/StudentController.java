@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.edu.bjtu.yb.restaurant.bean.StudentBean;
 import cn.edu.bjtu.yb.restaurant.service.LoginService;
 
 @RestController
@@ -19,7 +20,7 @@ public class StudentController {
 	@Autowired
 	private LoginService loginservice;
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET)
 	public String getUser(
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
@@ -29,7 +30,26 @@ public class StudentController {
 		if(result != null){
 			httpsession.setAttribute("username", username);
 		}
-		return result;		
+		return result;
 	}
-
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public String addUser(
+			@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "name") String name,
+			@RequestParam(value = "age") int age,
+			@RequestParam(value = "gender") String gender){
+		StudentBean stu = new StudentBean();
+		stu.setUsername(username);
+		stu.setPassword(password);
+		stu.setName(name);
+		stu.setAge(age);
+		stu.setGender(gender);
+		
+		String result = loginservice.addStuInfo(stu);
+		
+		return result;
+	}
+	
 }
