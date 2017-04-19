@@ -2,6 +2,8 @@ package cn.edu.bjtu.yb.restaurant.controller.rest;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,14 @@ public class StudentController {
 	public String getUser(
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
+			HttpServletResponse response,
 			HttpSession httpsession) throws IOException {
 
 		String result = loginservice.getStuInfo(username, password);
 		if(result != null){
-			httpsession.setAttribute("username", username);
+			httpsession.setAttribute("token", username);
+			Cookie cookie = new Cookie("token",username);
+			response.addCookie(cookie);
 		}
 		return result;
 	}
@@ -39,7 +44,9 @@ public class StudentController {
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "age") int age,
-			@RequestParam(value = "gender") String gender){
+			@RequestParam(value = "gender") String gender,
+			HttpServletResponse response,
+			HttpSession httpsession){
 		StudentBean stu = new StudentBean();
 		stu.setUsername(username);
 		stu.setPassword(password);
@@ -48,6 +55,12 @@ public class StudentController {
 		stu.setGender(gender);
 		
 		String result = loginservice.addStuInfo(stu);
+		
+		if(result != null){
+			httpsession.setAttribute("token", username);
+			Cookie cookie = new Cookie("token",username);
+			response.addCookie(cookie);
+		}
 		
 		return result;
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
@@ -14,8 +15,11 @@ public interface RestaurantDao {
 	@Select("SELECT * FROM restaurant WHERE username=#{username} and password=#{password}")
 	public RestaurantBean queryOne(@Param("username")String username,@Param("password")String password);
 
-	@Select("SELECT name,pic FROM restaurant")
+	@Select("SELECT id,name,pic FROM restaurant")
 	public List<RestaurantBean> queryAll();
+	
+	@Select("SELECT * FROM dish where belongto=#{belongto}")
+	public List<DishBean> queryDishByRestaurantId(int belongto);
 	
 	public static void main(String[] args) throws IOException{
 		Iterator<RestaurantBean> it = SqlUtil.getSession().getMapper(RestaurantDao.class).queryAll().iterator();
