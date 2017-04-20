@@ -82,10 +82,10 @@ public class HomeController {
 		
 		if(res != null){
 			System.out.println(res.getName());
-			httpsession.setAttribute("token", username);
+			httpsession.setAttribute("token", res.getId() + "");
 			httpsession.setAttribute("res", res);
 			model.addAttribute("restaurant", res);
-			Cookie _token = new Cookie("token", res.getUsername());
+			Cookie _token = new Cookie("token", res.getId() + "");
 			response.addCookie(_token);
 			return "_home";
 		}

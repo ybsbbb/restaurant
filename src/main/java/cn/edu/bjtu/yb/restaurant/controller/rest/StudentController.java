@@ -20,7 +20,7 @@ import cn.edu.bjtu.yb.restaurant.service.LoginService;
 public class StudentController {
 	
 	@Autowired
-	private LoginService loginservice;
+	private LoginService loginService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getUser(
@@ -29,7 +29,7 @@ public class StudentController {
 			HttpServletResponse response,
 			HttpSession httpsession) throws IOException {
 
-		String result = loginservice.getStuInfo(username, password);
+		String result = loginService.getStuInfo(username, password);
 		if(result != null){
 			httpsession.setAttribute("token", username);
 			Cookie cookie = new Cookie("token",username);
@@ -54,7 +54,7 @@ public class StudentController {
 		stu.setAge(age);
 		stu.setGender(gender);
 		
-		String result = loginservice.addStuInfo(stu);
+		String result = loginService.addStuInfo(stu);
 		
 		if(result != null){
 			httpsession.setAttribute("token", username);
