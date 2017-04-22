@@ -45,13 +45,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public String getDishList(String restaurant) throws IOException {
+	public String getDishList(String restaurant, String window) throws IOException {
 		JSONArray ja = new JSONArray();
 		
-		int belongto = Integer.parseInt(restaurant);
+		int restaurantId = Integer.parseInt(restaurant);
+		int windowId = Integer.parseInt(window);
 		SqlSession session = SqlUtil.getSession();
 		RestaurantDao dao = session.getMapper(RestaurantDao.class);
-		List<DishBean> beanList = dao.queryDishByRestaurantId(belongto);
+		List<DishBean> beanList = dao.queryDishByRestaurantIdAndWindowId(restaurantId,windowId);
 		Iterator<DishBean> it = beanList.iterator();
 		while(it.hasNext()){
 			DishBean bean = it.next();
@@ -60,7 +61,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 			jo.put("name", bean.getName());
 			jo.put("description", bean.getDescription());
 			jo.put("pic", bean.getPic());
-			jo.put("belongto", bean.getBelongto());
+			jo.put("window", bean.getWindow());
+			jo.put("restaurant", bean.getRestaurant());
 			jo.put("price", bean.getPrice());
 			ja.put(jo.toString());
 		}
@@ -73,7 +75,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		String filePath = "D:/RESOURCES/STATIC/IMG/DISH/";
 		String resourcePath = "/img/dish/";
 		String originalName = file.getOriginalFilename();
-		String fileName = dish.getName() + originalName.substring(originalName.lastIndexOf('.'));
+		String fileName = dish.getRestaurant() //菜样图命名：餐厅+窗口+菜名+后缀
+				+ dish.getWindow() 
+				+ dish.getName() 
+				+ originalName.substring(originalName.lastIndexOf('.'));
 		File dest = new File(filePath + fileName);
 		storageService.store(dest, file);
 		
@@ -86,8 +91,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return 0;
 	}
 
+	@Override
+	public String getWindowList(String restaurant) throws IOException {
+		return null;
+	}
+
 	public static void main(String[] args) throws IOException{
-		RestaurantServiceImpl impl = new RestaurantServiceImpl();
-		impl.getDishList("2");
 	}
 }

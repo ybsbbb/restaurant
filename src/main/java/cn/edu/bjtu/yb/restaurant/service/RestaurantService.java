@@ -9,6 +9,7 @@ import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 public interface RestaurantService {
 
 	public String getRestaurantList() throws IOException;
-	public String getDishList(String restaurant) throws IOException;
+	public String getDishList(String restaurant, String window) throws IOException;
+	public String getWindowList(String restaurant) throws IOException;
 	public int addDish(DishBean dish, MultipartFile file) throws IOException;
 }

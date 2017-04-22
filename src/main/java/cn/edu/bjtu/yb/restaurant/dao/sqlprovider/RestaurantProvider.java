@@ -14,7 +14,8 @@ public class RestaurantProvider {
 				VALUES("description","#{description}");
 				VALUES("pic","#{pic}");
 				VALUES("price","#{price}");
-				VALUES("belongto","#{belongto}");
+				VALUES("window","#{window}");
+				VALUES("restaurant","#{restaurant}");
 			}
 		}.toString();
 		return sql;

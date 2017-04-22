@@ -33,6 +33,7 @@ public class WebRestaurantController {
 			@RequestParam(value="description") String description,
 			@RequestParam(value="price") int price,
 			@RequestParam(value="pic") MultipartFile file,
+			@RequestParam(value="window") int window,
 			@CookieValue(value="token", required=false) String token,
 			HttpSession session) throws IOException {
 		if(token != null) {
@@ -41,7 +42,8 @@ public class WebRestaurantController {
 				bean.setName(name);
 				bean.setDescription(description);
 				bean.setPrice(price);
-				bean.setBelongto(Integer.parseInt(restaurant));
+				bean.setWindow(window);
+				bean.setRestaurant(Integer.parseInt(restaurant));
 				service.addDish(bean, file);
 			}
 		}

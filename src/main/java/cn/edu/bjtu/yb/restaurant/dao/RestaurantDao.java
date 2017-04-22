@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
+import cn.edu.bjtu.yb.restaurant.bean.WindowBean;
 import cn.edu.bjtu.yb.restaurant.dao.sqlprovider.RestaurantProvider;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
@@ -19,19 +20,21 @@ public interface RestaurantDao {
 
 	@Select("SELECT id,name,pic FROM restaurant")
 	public List<RestaurantBean> queryAll();
-	
-	@Select("SELECT * FROM dish WHERE belongto=#{belongto}")
-	public List<DishBean> queryDishByRestaurantId(int belongto);
-	
-	@Select("SELECT * FROM dishdata")
-	public int queryNextDishId();
+
+	@Select("SELECT * FROM window WHERE restaurant=#{restaurant}")
+	public List<WindowBean> queryWindowByRestaurantId(@Param("restaurant")int restaurant);
+
+	@Select("SELECT * FROM dish WHERE restaurant=#{restaurant} and window=#{window}")
+	public List<DishBean> queryDishByRestaurantIdAndWindowId(@Param("restaurant")int restaurant,@Param("window")int window);
 	
 	@InsertProvider(method = "insertProvider", type=RestaurantProvider.class)
 	public int insertOne(DishBean dish);
-	
+	//数据库详细设计文档化
+	//服务器端详细设计文档化，架构，时序图等
+	//接口文档
 	public static void main(String[] args) throws IOException{
 		DishBean dish = new DishBean();
-		dish.setBelongto(1);
+		dish.setRestaurant(1);
 		dish.setDescription("测试菜8，请勿食用");
 		dish.setName("测试菜8");
 		dish.setPic("/img/dish/8.jpg");

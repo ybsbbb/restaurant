@@ -7,7 +7,8 @@ public class DishBean {
 	private String description;
 	private String pic;
 	private int price;
-	private int belongto;
+	private int restaurant;
+	private int window;
 	public int getId() {
 		return id;
 	}
@@ -38,10 +39,16 @@ public class DishBean {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getBelongto() {
-		return belongto;
+	public int getRestaurant() {
+		return restaurant;
 	}
-	public void setBelongto(int belongto) {
-		this.belongto = belongto;
+	public void setRestaurant(int restaurant) {
+		this.restaurant = restaurant;
+	}
+	public int getWindow() {
+		return window;
+	}
+	public void setWindow(int window) {
+		this.window = window;
 	}
 }

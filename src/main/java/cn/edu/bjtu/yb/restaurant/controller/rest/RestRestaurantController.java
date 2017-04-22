@@ -37,17 +37,38 @@ public class RestRestaurantController {
 	/**
 	 * 
 	 * @param restaurant 餐厅id
-	 * @return 返回指定餐厅的所有菜的列表
+	 * @return 返回指定餐厅的所有窗口的列表
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/{restaurant}", method = RequestMethod.GET)
-	public String getRestaurant(@PathVariable String restaurant) throws IOException{
-		String result = service.getDishList(restaurant);
+	@RequestMapping(value = {"/{restaurant}","/{restaurans}/windows"}, method = RequestMethod.GET)
+	public String getWindowsByRestaurant(@PathVariable String restaurant) throws IOException{
+		String result = service.getWindowList(restaurant);
 		return result;
 	}
 	
-	@RequestMapping(value = "/{restaurant}", method = RequestMethod.POST)
+	@RequestMapping(value = {"/{restaurans}/windows/{window}"}, method = RequestMethod.GET)
+	public String getDishByRestaurantAndWindow(@PathVariable String restaurant,
+			@PathVariable String window) throws IOException{
+		String result = service.getDishList(restaurant, window);
+		return result;
+	}
+	
+	/**
+	 * 添加菜
+	 * @param restaurant餐厅id
+	 * @param name 菜名
+	 * @param description 菜的描述
+	 * @param price 菜的价格
+	 * @param file 菜的样图
+	 * @param window 菜的窗口
+	 * @param token 用户身份
+	 * @param session
+	 * @return 菜添加结果(success/failure)
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/{restaurant}/windows/{window}", method = RequestMethod.POST)
 	public String addDish(@PathVariable String restaurant,
+			@PathVariable String window,
 			@RequestParam(value="name") String name,
 			@RequestParam(value="description") String description,
 			@RequestParam(value="price") int price,
@@ -60,7 +81,8 @@ public class RestRestaurantController {
 				bean.setName(name);
 				bean.setDescription(description);
 				bean.setPrice(price);
-				bean.setBelongto(Integer.parseInt(restaurant));
+				bean.setWindow(Integer.parseInt(window));
+				bean.setRestaurant(Integer.parseInt(restaurant));
 				service.addDish(bean, file);
 				return "success";
 			}
