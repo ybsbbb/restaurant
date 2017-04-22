@@ -97,5 +97,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	public static void main(String[] args) throws IOException{
+		RestaurantServiceImpl rsi = new RestaurantServiceImpl();
+		rsi.getDishList("1","1");
 	}
 }

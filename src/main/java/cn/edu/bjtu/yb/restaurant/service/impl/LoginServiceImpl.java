@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		if(stu != null) {
 			JSONObject jo = new JSONObject();
-			jo.put("username", stu.getUsername());
+			jo.put("token", stu.getUsername());
 			jo.put("name", stu.getName());
 			jo.put("age", stu.getAge());
 			jo.put("gender", "0".equals(stu.getGender()) ? "男" : "1".equals(stu.getGender()) ? "女": "无");
@@ -58,4 +58,8 @@ public class LoginServiceImpl implements LoginService {
 		return null;
 	}
 
+	public static void main(String[] args) throws IOException {
+		LoginServiceImpl lsi = new LoginServiceImpl();
+		lsi.getStuInfo("test", "test");
+	}
 }

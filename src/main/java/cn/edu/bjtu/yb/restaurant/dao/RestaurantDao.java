@@ -33,16 +33,8 @@ public interface RestaurantDao {
 	//服务器端详细设计文档化，架构，时序图等
 	//接口文档
 	public static void main(String[] args) throws IOException{
-		DishBean dish = new DishBean();
-		dish.setRestaurant(1);
-		dish.setDescription("测试菜8，请勿食用");
-		dish.setName("测试菜8");
-		dish.setPic("/img/dish/8.jpg");
-		dish.setPrice(1000);
 		SqlSession session = SqlUtil.getSession();
 		RestaurantDao dao = session.getMapper(RestaurantDao.class);
-		dao.insertOne(dish);
-		session.commit();
-		session.close();
+		dao.queryDishByRestaurantIdAndWindowId(1, 1);
 	}
 }

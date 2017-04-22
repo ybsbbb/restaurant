@@ -43,8 +43,8 @@ public class StudentController {
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "name") String name,
-			@RequestParam(value = "age") int age,
-			@RequestParam(value = "gender") String gender,
+			@RequestParam(value = "age", required=false) int age,
+			@RequestParam(value = "gender", required=false) String gender,
 			HttpServletResponse response,
 			HttpSession httpsession){
 		StudentBean stu = new StudentBean();
