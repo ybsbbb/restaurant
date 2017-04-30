@@ -1,9 +1,9 @@
 # restaurant
 ## 相关说明
 
-1.本项目使用maven构建，相关依赖需要maven来管理
-2.jdk版本 1.8，其他版本没有测试
-3.启动类为 cn.edu.bjtu.yb.restaurant.App， Spring Boot 内嵌Tomcat，直接以普通java项目运行即可
+1.本项目使用maven构建，相关依赖需要maven来管理  
+2.jdk版本 1.8，其他版本没有测试  
+3.启动类为 cn.edu.bjtu.yb.restaurant.App， Spring Boot 内嵌Tomcat，直接以普通java项目运行即可  
 
 ## rest接口:
 1.[ip]:8080/user,  
