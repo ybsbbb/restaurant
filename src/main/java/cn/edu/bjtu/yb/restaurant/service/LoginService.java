@@ -9,6 +9,6 @@ public interface LoginService {
 
 	public RestaurantBean getResInfo(String username, String password) throws IOException;
 	public String getStuInfo(String username, String password) throws IOException;
-	public String addStuInfo(StudentBean stu);
-	public String setStuInfo(StudentBean stu);
+	public String addStuInfo(StudentBean stu) throws IOException;
+	public String setStuInfo(StudentBean stu) throws IOException;
 }

@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		if(stu != null) {
 			JSONObject jo = new JSONObject();
-			jo.put("token", stu.getUsername());
+			jo.put("username", stu.getUsername());
 			jo.put("name", stu.getName());
 			jo.put("age", stu.getAge());
 			jo.put("gender", "0".equals(stu.getGender()) ? "男" : "1".equals(stu.getGender()) ? "女": "无");
@@ -49,12 +49,39 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String addStuInfo(StudentBean stu) {
+	public String addStuInfo(StudentBean stu) throws IOException {
+		
+		SqlSession sqlsession = SqlUtil.getSession();
+		StudentDao studao = sqlsession.getMapper(StudentDao.class);
+		int result = studao.insertOne(stu);
+		if(result == 1){
+			JSONObject jo = new JSONObject();
+			jo.put("username", stu.getUsername());
+			jo.put("name", stu.getName());
+			jo.put("age",stu.getAge());
+			jo.put("gender", stu.getGender());
+			jo.put("account", stu.getAccount());
+			System.out.println(jo.toString());
+			return jo.toString();
+		}		
 		return null;
 	}
 
 	@Override
-	public String setStuInfo(StudentBean stu) {
+	public String setStuInfo(StudentBean stu) throws IOException {
+		SqlSession sqlsession = SqlUtil.getSession();
+		StudentDao studao = sqlsession.getMapper(StudentDao.class);
+		int result = studao.updateOne(stu);
+		if(result == 1){
+			JSONObject jo = new JSONObject();
+			jo.put("username", stu.getUsername());
+			jo.put("name", stu.getName());
+			jo.put("age",stu.getAge());
+			jo.put("gender", stu.getGender());
+			jo.put("account", stu.getAccount());
+			System.out.println(jo.toString());
+			return jo.toString();
+		}
 		return null;
 	}
 

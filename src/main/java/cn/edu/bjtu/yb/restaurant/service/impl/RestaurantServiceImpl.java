@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
+import cn.edu.bjtu.yb.restaurant.bean.WindowBean;
 import cn.edu.bjtu.yb.restaurant.dao.RestaurantDao;
 import cn.edu.bjtu.yb.restaurant.service.RestaurantService;
 import cn.edu.bjtu.yb.restaurant.service.StorageService;
@@ -93,7 +94,22 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public String getWindowList(String restaurant) throws IOException {
-		return null;
+		JSONArray ja = new JSONArray();
+		SqlSession session = SqlUtil.getSession();
+		RestaurantDao dao = session.getMapper(RestaurantDao.class);
+		int restaurantId = Integer.parseInt(restaurant);
+		List<WindowBean> beanlist = dao.queryWindowByRestaurantId(restaurantId);
+		Iterator<WindowBean> it = beanlist.iterator();
+		while(it.hasNext()) {
+			WindowBean wb = it.next();
+			JSONObject jo = new JSONObject();
+			
+			jo.put("id", wb.getId());
+			jo.put("name", wb.getName());
+			
+			ja.put(jo.toString());
+		}
+		return ja.toString();
 	}
 
 	public static void main(String[] args) throws IOException{

@@ -46,7 +46,7 @@ public class StudentController {
 			@RequestParam(value = "age", required=false) int age,
 			@RequestParam(value = "gender", required=false) String gender,
 			HttpServletResponse response,
-			HttpSession httpsession){
+			HttpSession httpsession) throws IOException{
 		StudentBean stu = new StudentBean();
 		stu.setUsername(username);
 		stu.setPassword(password);

@@ -40,13 +40,13 @@ public class RestRestaurantController {
 	 * @return 返回指定餐厅的所有窗口的列表
 	 * @throws IOException
 	 */
-	@RequestMapping(value = {"/{restaurant}","/{restaurans}/windows"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/{restaurant}","/{restaurant}/windows"}, method = RequestMethod.GET)
 	public String getWindowsByRestaurant(@PathVariable String restaurant) throws IOException{
 		String result = service.getWindowList(restaurant);
 		return result;
 	}
 	
-	@RequestMapping(value = {"/{restaurans}/windows/{window}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/{restaurant}/windows/{window}"}, method = RequestMethod.GET)
 	public String getDishByRestaurantAndWindow(@PathVariable String restaurant,
 			@PathVariable String window) throws IOException{
 		String result = service.getDishList(restaurant, window);

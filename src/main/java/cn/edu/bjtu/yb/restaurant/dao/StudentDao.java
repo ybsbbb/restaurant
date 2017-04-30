@@ -36,7 +36,6 @@ public interface StudentDao {
 			session.commit();
 			session.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

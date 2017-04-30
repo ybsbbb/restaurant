@@ -43,7 +43,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value={"/home"}, method=RequestMethod.GET)
 	public String home(
-			@CookieValue(value="token") String token,
+			@CookieValue(value="token", required=false) String token,
 			HttpServletResponse response,
 			HttpSession httpsession,
 			Model model){

@@ -15,7 +15,7 @@ public class StudentProvider {
 				VALUES("name","#{name}");
 				VALUES("age","#{age}");
 				if(stu.getGender() != null) {
-					VALUES("gender","#gender");
+					VALUES("gender","#{gender}");
 				}				
 			}
 		}.toString();
@@ -25,7 +25,19 @@ public class StudentProvider {
 	public String updateProvider(final StudentBean stu) {
 		String sql = new SQL(){
 			{
-				
+				UPDATE("stuuser");
+				if(stu.getUsername() != null && !"".equals(stu.getUsername())){
+					SET("username","#{username}");
+				}
+				if(stu.getPassword() != null && !"".equals(stu.getPassword())){
+					SET("password","#{password}");
+				}
+				if(stu.getName() != null && !"".equals(stu.getName())){
+					SET("name","#{name}");
+				}
+				if(stu.getGender() != null && !"".equals(stu.getGender())){
+					SET("gender","#{gender}");
+				}
 			}
 		}.toString();
 		

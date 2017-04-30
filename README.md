@@ -12,8 +12,8 @@
 username 用户名，必须  
 password 密码，必须  
 *返回*：  
-1.认证成功，用户个人资料，eg:{"gender":"无","name":"测试学生","age":18,"account":100,"token":"test"}  	
-gender 性别,name 昵称, age 年龄, account 余额, token 用户身份标识  
+1.认证成功，用户个人资料，eg:{"gender":"无","name":"测试学生","age":18,"account":100,"username":"test"}  	
+gender 性别,name 昵称, age 年龄, account 余额, username 用户身份标识  
 2.认证失败，""  
 
 2.[ip]:8080/user,  
