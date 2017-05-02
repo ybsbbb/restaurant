@@ -54,6 +54,8 @@ public class LoginServiceImpl implements LoginService {
 		SqlSession sqlsession = SqlUtil.getSession();
 		StudentDao studao = sqlsession.getMapper(StudentDao.class);
 		int result = studao.insertOne(stu);
+		sqlsession.commit();
+		SqlUtil.closeSession(sqlsession);
 		if(result == 1){
 			JSONObject jo = new JSONObject();
 			jo.put("username", stu.getUsername());
@@ -72,6 +74,8 @@ public class LoginServiceImpl implements LoginService {
 		SqlSession sqlsession = SqlUtil.getSession();
 		StudentDao studao = sqlsession.getMapper(StudentDao.class);
 		int result = studao.updateOne(stu);
+		sqlsession.commit();
+		SqlUtil.closeSession(sqlsession);
 		if(result == 1){
 			JSONObject jo = new JSONObject();
 			jo.put("username", stu.getUsername());

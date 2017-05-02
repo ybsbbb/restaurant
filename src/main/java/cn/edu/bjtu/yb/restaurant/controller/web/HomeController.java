@@ -1,6 +1,7 @@
 package cn.edu.bjtu.yb.restaurant.controller.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
+import cn.edu.bjtu.yb.restaurant.bean.WindowBean;
 import cn.edu.bjtu.yb.restaurant.service.LoginService;
+import cn.edu.bjtu.yb.restaurant.service.RestaurantService;
 
 /**
  * 
@@ -30,6 +35,9 @@ public class HomeController {
 	
 	@Autowired
 	LoginService loginservice;
+	
+	@Autowired
+	RestaurantService restaurantservice;
 
 	/**
 	 * <p>用户直接输入"/home"路由的controller,
@@ -40,17 +48,24 @@ public class HomeController {
 	 * @param httpsession
 	 * @param model
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping(value={"/home"}, method=RequestMethod.GET)
 	public String home(
 			@CookieValue(value="token", required=false) String token,
 			HttpServletResponse response,
 			HttpSession httpsession,
-			Model model){
+			Model model) throws IOException{
 		if(token != null && httpsession.getAttribute("token") != null){
 			if(((String)httpsession.getAttribute("token")).equals(token)) {
 				RestaurantBean res = (RestaurantBean) httpsession.getAttribute("res");
 				model.addAttribute("restaurant", res);
+				List<WindowBean> windows = restaurantservice.getWindowListObject(res.getId() + "");
+				for(WindowBean wb : windows){
+					List<DishBean> db = restaurantservice.getDishListObject(res.getId() + "", wb.getId() + "");
+					wb.setDishes(db);
+				}
+				model.addAttribute("windows", windows);
 				return "_home";
 			}
 		}
@@ -87,6 +102,12 @@ public class HomeController {
 			model.addAttribute("restaurant", res);
 			Cookie _token = new Cookie("token", res.getId() + "");
 			response.addCookie(_token);
+			List<WindowBean> windows = restaurantservice.getWindowListObject(res.getId() + "");
+			for(WindowBean wb : windows){
+				List<DishBean> db = restaurantservice.getDishListObject(res.getId() + "", wb.getId() + "");
+				wb.setDishes(db);
+			}
+			model.addAttribute("windows", windows);
 			return "_home";
 		}
 		return "_login";

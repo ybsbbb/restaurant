@@ -21,11 +21,11 @@ public class WebRestaurantController {
 
 	@Autowired
 	RestaurantService service;
-	
+
 	@GetMapping("/adddish")
 	public String addDishPage() {
 		return "_adddish";
-	}
+	}	
 	
 	@PostMapping("/adddish")
 	public String addDish(@PathVariable String restaurant,

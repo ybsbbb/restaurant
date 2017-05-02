@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cn.edu.bjtu.yb.restaurant.dao.OrderDao">
+	<insert id="insertMenus" parameterType="cn.edu.bjtu.yb.restaurant.bean.DishMenu">
+		insert into dishmenu(orderid, window, dish, number) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.orderid}, #{item.window}, #{item.dish}, #{item.number})		
+		</foreach>
+	</insert>
+</mapper>

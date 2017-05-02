@@ -7,5 +7,14 @@
 <body>
 <p>Home</p>
 <span th:text="${restaurant.name}"></span>
+<div th:each="window : ${windows}">
+	<p th:text="${window.name}"></p>
+	<div th:each="dish : ${window.dishes}">
+		<p th:text="${dish.name}"></p>
+		<p th:text="${dish.description}"></p>
+		<p th:text="${dish.price}"></p>
+		<img th:src="${dish.pic}"></img>
+	</div>
+</div>
 </body>
 </html>

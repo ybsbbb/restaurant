@@ -13,8 +13,15 @@
             </dataSource>
         </environment>
     </environments>
+    <!-- <typeAliases>
+  		<typeAlias alias="DishOrder" type="cn.edu.bjtu.yb.restaurant.bean.DishOrder"/>
+  		<typeAlias alias="DishOrder" type="cn.edu.bjtu.yb.restaurant.bean.DishMenu"/>
+	</typeAliases>
+	 -->
     <mappers>
 		<mapper class="cn.edu.bjtu.yb.restaurant.dao.StudentDao"/>
 		<mapper class="cn.edu.bjtu.yb.restaurant.dao.RestaurantDao"/>
+		<mapper class="cn.edu.bjtu.yb.restaurant.dao.OrderDao"/>
+		<mapper resource="menudao.xml"/>
     </mappers>
 </configuration>

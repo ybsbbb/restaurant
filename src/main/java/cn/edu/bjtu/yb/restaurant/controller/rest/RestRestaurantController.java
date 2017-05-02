@@ -42,14 +42,14 @@ public class RestRestaurantController {
 	 */
 	@RequestMapping(value = {"/{restaurant}","/{restaurant}/windows"}, method = RequestMethod.GET)
 	public String getWindowsByRestaurant(@PathVariable String restaurant) throws IOException{
-		String result = service.getWindowList(restaurant);
+		String result = service.getWindowListJSON(restaurant);
 		return result;
 	}
 	
 	@RequestMapping(value = {"/{restaurant}/windows/{window}"}, method = RequestMethod.GET)
 	public String getDishByRestaurantAndWindow(@PathVariable String restaurant,
 			@PathVariable String window) throws IOException{
-		String result = service.getDishList(restaurant, window);
+		String result = service.getDishListJSON(restaurant, window);
 		return result;
 	}
 	
