@@ -14,6 +14,11 @@ public class TEST {
 	public String student(){
 		return "_stu";
 	}
+
+	@RequestMapping("/addorder")
+	public String order(){
+		return "_order";
+	}
 	
 	@RequestMapping("/restapi")
 	public String users(Model model) {
@@ -76,6 +81,12 @@ public class TEST {
 		b6.setRealLink("http://localhost:8080/stu");
 		b6.setShowLink("http://localhost:8080/user");		
 		restapi.add(b6);
+
+		APIShow b7 = new APIShow();
+		b7.setMethod("POST");
+		b7.setRealLink("http://localhost:8080/addorder");
+		b7.setShowLink("http://localhost:8080/orders/order");		
+		restapi.add(b7);
 		
 		model.addAttribute("webapis",webapi);
 		model.addAttribute("restapis", restapi);

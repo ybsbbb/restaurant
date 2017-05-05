@@ -54,4 +54,15 @@ name 餐厅名称，id 餐厅id，pic 餐厅图片路径(静态资源)
 1.token认证成功：指定餐厅的指定窗口的菜列表，eg：["{\"price\":1000,\"restaurant\":1,\"name\":\"测试菜\",\"description\":\"测试菜，不可食用\",\"id\":16,\"pic\":\"/img/dish/1.png\",\"window\":1}","{\"price\":1000,\"restaurant\":1,\"name\":\"测试菜2\",\"description\":\"测试菜2，不可食用\",\"id\":17,\"pic\":\"/img/dish/2.png\",\"window\":1}"]  
 price 价格，restaurant 餐厅id，name 菜名，description 菜的描述，id，菜的id，pic 菜样图的路径(静态资源)，window 窗口id  
 2.token认证失败：""  
-	
+
+6.[ip]:8080/orders/order  
+*请求类型*：POST
+*参数*：
+username 用户名 必须  
+order 订单 必须，格式为JSON字符串，eg:添加
+{"menu":[{"window":"1","dish":"1","number":"1"},{"window":"1","dish":"1","number":"1"}],"restaurant":"1","price":"1000","taketime":"2017-05-05 11:11:11"}  
+menu: 菜单，是用户选择的菜，是一个array，内容为JSON对象，该对象包括window 该菜所属窗口、dish 该菜的id、number 该菜的份数  
+restaurant：餐厅id，表明该订单是在那个餐厅下的单  
+price：总价格  
+taketime：取餐时间，是一个时间格式的字符串 yyyy-mm-dd hh:MM:ss.sss  
+

@@ -27,13 +27,22 @@ public class RestaurantServiceImpl implements RestaurantService {
 	StorageService storageService;
 	
 	@Override
-	public String getRestaurantList() throws IOException {
+	public String getRestaurantList() {
 		JSONArray ja = new JSONArray();
-		SqlSession session = SqlUtil.getSession();
-		RestaurantDao dao = session.getMapper(RestaurantDao.class);
-		session.commit();
-		SqlUtil.closeSession(session);
-		List<RestaurantBean> list = dao.queryAll();
+		SqlSession session = null;
+		RestaurantDao dao = null;
+		List<RestaurantBean> list = null;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			list = dao.queryAll();
+			session.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(session);
+		}
 		Iterator<RestaurantBean> it = list.iterator();
 		while(it.hasNext()){
 			JSONObject jo = new JSONObject();
@@ -48,16 +57,25 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public String getDishListJSON(String restaurant, String window) throws IOException {
+	public String getDishListJSON(String restaurant, String window) {
 		JSONArray ja = new JSONArray();
 		
 		int restaurantId = Integer.parseInt(restaurant);
 		int windowId = Integer.parseInt(window);
-		SqlSession session = SqlUtil.getSession();
-		RestaurantDao dao = session.getMapper(RestaurantDao.class);
-		List<DishBean> beanList = dao.queryDishByRestaurantIdAndWindowId(restaurantId,windowId);
-		session.commit();
-		SqlUtil.closeSession(session);
+		SqlSession session = null;
+		RestaurantDao dao = null;
+		List<DishBean> beanList = null;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			beanList = dao.queryDishByRestaurantIdAndWindowId(restaurantId,windowId);
+			session.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(session);			
+		}
 		Iterator<DishBean> it = beanList.iterator();
 		while(it.hasNext()){
 			DishBean bean = it.next();
@@ -76,18 +94,27 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<DishBean> getDishListObject(String restaurant, String window) throws IOException {
+	public List<DishBean> getDishListObject(String restaurant, String window) {
 		int restaurantId = Integer.parseInt(restaurant);
 		int windowId = Integer.parseInt(window);
-		SqlSession session = SqlUtil.getSession();
-		RestaurantDao dao = session.getMapper(RestaurantDao.class);
-		List<DishBean> beanList = dao.queryDishByRestaurantIdAndWindowId(restaurantId,windowId);
-		SqlUtil.closeSession(session);
+		SqlSession session = null;
+		RestaurantDao dao = null;
+		List<DishBean> beanList = null;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			beanList = dao.queryDishByRestaurantIdAndWindowId(restaurantId,windowId);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(session);			
+		}
 		return beanList;
 	}
 	
 	@Override
-	public int addDish(DishBean dish, MultipartFile file) throws IOException {
+	public int addDish(DishBean dish, MultipartFile file) {
 		String filePath = "D:/RESOURCES/STATIC/IMG/DISH/";
 		String resourcePath = "/img/dish/";
 		String originalName = file.getOriginalFilename();
@@ -99,23 +126,40 @@ public class RestaurantServiceImpl implements RestaurantService {
 		storageService.store(dest, file);
 		
 		dish.setPic(resourcePath + fileName);
-		SqlSession session = SqlUtil.getSession();
-		RestaurantDao dao = session.getMapper(RestaurantDao.class);
-		dao.insertOne(dish);
-		session.commit();
-		session.close();
-		return 0;
+		SqlSession session = null;
+		RestaurantDao dao = null;
+		int result = 0;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			result = dao.insertOne(dish);
+			session.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			session.close();			
+		}
+		return result;
 	}
 
 	@Override
-	public String getWindowListJSON(String restaurant) throws IOException {
+	public String getWindowListJSON(String restaurant) {
 		JSONArray ja = new JSONArray();
-		SqlSession session = SqlUtil.getSession();
-		RestaurantDao dao = session.getMapper(RestaurantDao.class);
+		SqlSession session = null;
+		RestaurantDao dao = null;
 		int restaurantId = Integer.parseInt(restaurant);
-		List<WindowBean> beanlist = dao.queryWindowByRestaurantId(restaurantId);
-		session.commit();
-		SqlUtil.closeSession(session);
+		List<WindowBean> beanlist = null;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			beanlist = dao.queryWindowByRestaurantId(restaurantId);
+			session.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(session);			
+		}
 		Iterator<WindowBean> it = beanlist.iterator();
 		while(it.hasNext()) {
 			WindowBean wb = it.next();
@@ -130,12 +174,20 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<WindowBean> getWindowListObject(String restaurant) throws IOException {
-		SqlSession session = SqlUtil.getSession();
-		RestaurantDao dao = session.getMapper(RestaurantDao.class);
+	public List<WindowBean> getWindowListObject(String restaurant) {
+		SqlSession session = null;
+		RestaurantDao dao = null;
 		int restaurantId = Integer.parseInt(restaurant);
-		List<WindowBean> beanlist = dao.queryWindowByRestaurantId(restaurantId);
-		SqlUtil.closeSession(session);
+		List<WindowBean> beanlist = null;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			beanlist = dao.queryWindowByRestaurantId(restaurantId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			SqlUtil.closeSession(session);
+		}
 		return beanlist;
 	}
 	public static void main(String[] args) throws IOException{

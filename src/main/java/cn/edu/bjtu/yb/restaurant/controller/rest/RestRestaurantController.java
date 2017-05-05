@@ -29,7 +29,7 @@ public class RestRestaurantController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String getAllRestaurants() throws IOException{
+	public String getAllRestaurants() {
 		String result = service.getRestaurantList();
 		return result;		
 	}
@@ -41,14 +41,14 @@ public class RestRestaurantController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = {"/{restaurant}","/{restaurant}/windows"}, method = RequestMethod.GET)
-	public String getWindowsByRestaurant(@PathVariable String restaurant) throws IOException{
+	public String getWindowsByRestaurant(@PathVariable String restaurant) {
 		String result = service.getWindowListJSON(restaurant);
 		return result;
 	}
 	
 	@RequestMapping(value = {"/{restaurant}/windows/{window}"}, method = RequestMethod.GET)
 	public String getDishByRestaurantAndWindow(@PathVariable String restaurant,
-			@PathVariable String window) throws IOException{
+			@PathVariable String window) {
 		String result = service.getDishListJSON(restaurant, window);
 		return result;
 	}
@@ -74,7 +74,7 @@ public class RestRestaurantController {
 			@RequestParam(value="price") int price,
 			@RequestParam(value="pic") MultipartFile file,
 			@CookieValue(value="token", required=false) String token,
-			HttpSession session) throws IOException {
+			HttpSession session) {
 		if(token != null) {
 			if(token.equals((String)session.getAttribute("token"))) {
 				DishBean bean = new DishBean();

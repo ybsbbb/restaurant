@@ -1,7 +1,5 @@
 package cn.edu.bjtu.yb.restaurant.controller.rest;
 
-import java.io.IOException;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +25,7 @@ public class StudentController {
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
 			HttpServletResponse response,
-			HttpSession httpsession) throws IOException {
+			HttpSession httpsession) {
 
 		String result = loginService.getStuInfo(username, password);
 		if(result != null){
@@ -42,16 +40,16 @@ public class StudentController {
 	public String addUser(
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
-			@RequestParam(value = "name") String name,
-			@RequestParam(value = "age", required=false) int age,
+			@RequestParam(value = "name", required=false) String name,
+			@RequestParam(value = "age", required=false) String age,
 			@RequestParam(value = "gender", required=false) String gender,
 			HttpServletResponse response,
-			HttpSession httpsession) throws IOException{
+			HttpSession httpsession) {
 		StudentBean stu = new StudentBean();
 		stu.setUsername(username);
 		stu.setPassword(password);
 		stu.setName(name);
-		stu.setAge(age);
+		stu.setAge(age == null ? 0:Integer.parseInt(age));
 		stu.setGender(gender);
 		
 		String result = loginService.addStuInfo(stu);

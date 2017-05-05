@@ -17,22 +17,40 @@ import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 public class LoginServiceImpl implements LoginService {
 
 	@Override
-	public RestaurantBean getResInfo(String username, String password) throws IOException {
+	public RestaurantBean getResInfo(String username, String password) {
 
-		SqlSession sqlsession = SqlUtil.getSession();
-		RestaurantDao resdao = sqlsession.getMapper(RestaurantDao.class);
-		RestaurantBean res = resdao.queryOne(username, password);
-		SqlUtil.closeSession(sqlsession);
+		SqlSession sqlsession = null;
+		RestaurantDao resdao = null;
+		RestaurantBean res = null;
+		try {
+			sqlsession = SqlUtil.getSession();
+			resdao = sqlsession.getMapper(RestaurantDao.class);
+			res = resdao.queryOne(username, password);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(sqlsession);
+		}
 		return res;
 	}
 
 	@Override
-	public String getStuInfo(String username, String password) throws IOException {
+	public String getStuInfo(String username, String password) {
 
-		SqlSession sqlsession = SqlUtil.getSession();
-		StudentDao studao = sqlsession.getMapper(StudentDao.class);
-		StudentBean stu = studao.queryOne(username, password);
-		SqlUtil.closeSession(sqlsession);
+		SqlSession sqlsession = null;
+		StudentDao studao = null;
+		StudentBean stu = null;
+		try {
+			sqlsession = SqlUtil.getSession();
+			studao = sqlsession.getMapper(StudentDao.class);
+			stu = studao.queryOne(username, password);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(sqlsession);			
+		}
 		
 		if(stu != null) {
 			JSONObject jo = new JSONObject();
@@ -49,13 +67,25 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String addStuInfo(StudentBean stu) throws IOException {
+	public String addStuInfo(StudentBean stu) {
 		
-		SqlSession sqlsession = SqlUtil.getSession();
-		StudentDao studao = sqlsession.getMapper(StudentDao.class);
-		int result = studao.insertOne(stu);
-		sqlsession.commit();
-		SqlUtil.closeSession(sqlsession);
+		SqlSession sqlsession = null;
+		StudentDao studao = null;
+		int result = 0;
+		try {
+			sqlsession = SqlUtil.getSession();
+			studao = sqlsession.getMapper(StudentDao.class);
+			if(stu.getName() == null) {
+				stu.setName("匿名");
+			}
+			result = studao.insertOne(stu);
+			sqlsession.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(sqlsession);			
+		}
 		if(result == 1){
 			JSONObject jo = new JSONObject();
 			jo.put("username", stu.getUsername());
@@ -70,12 +100,21 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String setStuInfo(StudentBean stu) throws IOException {
-		SqlSession sqlsession = SqlUtil.getSession();
-		StudentDao studao = sqlsession.getMapper(StudentDao.class);
-		int result = studao.updateOne(stu);
-		sqlsession.commit();
-		SqlUtil.closeSession(sqlsession);
+	public String setStuInfo(StudentBean stu) {
+		SqlSession sqlsession = null;
+		StudentDao studao = null;
+		int result = 0;
+		try {
+			sqlsession = SqlUtil.getSession();
+			studao = sqlsession.getMapper(StudentDao.class);
+			result = studao.updateOne(stu);
+			sqlsession.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			SqlUtil.closeSession(sqlsession);
+		}
 		if(result == 1){
 			JSONObject jo = new JSONObject();
 			jo.put("username", stu.getUsername());

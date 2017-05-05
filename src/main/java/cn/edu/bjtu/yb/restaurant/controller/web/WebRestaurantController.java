@@ -1,7 +1,5 @@
 package cn.edu.bjtu.yb.restaurant.controller.web;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +33,7 @@ public class WebRestaurantController {
 			@RequestParam(value="pic") MultipartFile file,
 			@RequestParam(value="window") int window,
 			@CookieValue(value="token", required=false) String token,
-			HttpSession session) throws IOException {
+			HttpSession session) {
 		if(token != null) {
 			if(token.equals((String)session.getAttribute("token"))) {
 				DishBean bean = new DishBean();

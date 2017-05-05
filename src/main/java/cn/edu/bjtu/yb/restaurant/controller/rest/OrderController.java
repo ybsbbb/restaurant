@@ -1,6 +1,8 @@
 package cn.edu.bjtu.yb.restaurant.controller.rest;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,15 +25,15 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;	
 	
-	@PostMapping("/order")
+	@PostMapping("/orders/order")
 	public String addOrder(
 			@RequestParam("order") String order,
 			@RequestParam("username") String username
 			) {
 		JSONObject jo = new JSONObject(order);
-		JSONArray ja = (JSONArray) jo.get("menu");
+		JSONArray ja = (JSONArray)jo.get("menu");
 		DishOrder dor = new DishOrder();
-		DishMenu[] dm = new DishMenu[ja.length()];
+		List<DishMenu> dmlist = new ArrayList<DishMenu>();
 		
 		String orderid = orderGeneration.genOrderNumber();
 		
@@ -41,22 +43,30 @@ public class OrderController {
 		dor.setState(0);
 		dor.setPrice(jo.getInt("price"));
 		dor.setTaketime(Timestamp.valueOf(jo.getString("taketime")));
-		
+
 		for(int i = 0; i < ja.length(); i++) {
-			JSONObject tmp = new JSONObject(ja.get(i));
-			dm[i].setOrderid(orderid);
-			dm[i].setWindow(tmp.getInt("window"));
-			dm[i].setDish(tmp.getInt("dish"));
-			dm[i].setNumber(tmp.getInt("window"));
+			JSONObject tmp = (JSONObject)ja.get(i);
+			DishMenu dm = new DishMenu();
+			dm.setOrderid(orderid);
+			dm.setWindow(Integer.parseInt((String) tmp.get("window")));
+			dm.setDish(Integer.parseInt((String) tmp.get("dish")));
+			dm.setNumber(Integer.parseInt((String) tmp.get("number")));
+			dmlist.add(dm);
 		}
 		
-		
-		return "ok";
+		int oresult = orderService.addDishOrder(dor);
+		if (oresult == 0) {
+			return "fail";
+		}
+		int mresult = orderService.addDishMenu(dmlist);
+		if(mresult == 0) {
+			return "fail";
+		}
+		return orderid;
 	}
 
 	public static void main(String[] args) {
-		Timestamp ts = Timestamp.valueOf("2017-05-02 16:14:02.984");
+		Timestamp ts = Timestamp.valueOf("2017-05-02 16:14:02");
 		System.out.println(ts);
-		
 	}
 }
