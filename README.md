@@ -65,4 +65,7 @@ menu: 菜单，是用户选择的菜，是一个array，内容为JSON对象，�
 restaurant：餐厅id，表明该订单是在那个餐厅下的单  
 price：总价格  
 taketime：取餐时间，是一个时间格式的字符串 yyyy-mm-dd hh:MM:ss.sss  
+*返回*：  
+1.下单成功：返回订单号  
+2.下单失败：返回""  
 
