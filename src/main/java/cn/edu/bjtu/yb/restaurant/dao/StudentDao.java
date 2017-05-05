@@ -14,12 +14,28 @@ import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
 public interface StudentDao {
 	
+	/**
+	 * 插入一条学生信息
+	 * @param stu 学生对象
+	 * @return
+	 */
 	@InsertProvider(method = "insertProvider", type = StudentProvider.class)
 	public int insertOne(StudentBean stu);
 	
+	/**
+	 * 更新一个学生信息
+	 * @param stu 学生对象
+	 * @return
+	 */
 	@UpdateProvider(method = "updateProvider", type = StudentProvider.class)
 	public int updateOne(StudentBean stu);
 	
+	/**
+	 * 查询一个学生的信息
+	 * @param username
+	 * @param password
+	 * @return 学生对象
+	 */
 	@Select("SELECT * FROM stuuser WHERE username=#{username} and password=#{password}")
 	public StudentBean queryOne(@Param("username")String username,@Param("password")String password);
 

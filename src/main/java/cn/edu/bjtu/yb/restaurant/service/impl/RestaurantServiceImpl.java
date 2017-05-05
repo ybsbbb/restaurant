@@ -20,6 +20,11 @@ import cn.edu.bjtu.yb.restaurant.service.RestaurantService;
 import cn.edu.bjtu.yb.restaurant.service.StorageService;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
+/**
+ * RestaurantService的具体实现
+ * @author 杨博
+ *
+ */
 @Component
 public class RestaurantServiceImpl implements RestaurantService {
 

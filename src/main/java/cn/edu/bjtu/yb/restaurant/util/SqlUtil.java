@@ -8,6 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+/**
+ * 负责SqlSession的生成和关闭,单例
+ * @author 杨博
+ *
+ */
 public class SqlUtil {
 	
 	private static SqlUtil sqlutil;
@@ -19,6 +24,11 @@ public class SqlUtil {
 		factory = new SqlSessionFactoryBuilder().build(in);
 	}
 	
+	/**
+	 * 获取SqlSession实例
+	 * @return
+	 * @throws IOException
+	 */
 	public static SqlSession getSession() throws IOException {
 		if(sqlutil == null) {
 			sqlutil = new SqlUtil();
@@ -26,6 +36,10 @@ public class SqlUtil {
 		return sqlutil.factory.openSession();
 	}
 	
+	/**
+	 * 关闭SqlSession
+	 * @param session
+	 */
 	public static void closeSession(SqlSession session) {
 		session.close();
 	}

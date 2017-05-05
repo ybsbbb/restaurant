@@ -1,5 +1,10 @@
 package cn.edu.bjtu.yb.restaurant.bean;
 
+/**
+ * <p>学生模型
+ * @author yb775
+ *
+ */
 public class StudentBean {
 
 	private String username;

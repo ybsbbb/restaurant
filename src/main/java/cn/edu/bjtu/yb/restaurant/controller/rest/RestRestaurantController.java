@@ -1,7 +1,5 @@
 package cn.edu.bjtu.yb.restaurant.controller.rest;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,8 @@ public class RestRestaurantController {
 	RestaurantService service;
 	
 	/**
-	 * 
+	 * 请求餐厅列表
 	 * @return 以JSON格式返回所有餐厅的列表
-	 * @throws IOException
 	 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String getAllRestaurants() {
@@ -35,10 +32,9 @@ public class RestRestaurantController {
 	}
 	
 	/**
-	 * 
+	 * 根据餐厅请求窗口列表
 	 * @param restaurant 餐厅id
 	 * @return 返回指定餐厅的所有窗口的列表
-	 * @throws IOException
 	 */
 	@RequestMapping(value = {"/{restaurant}","/{restaurant}/windows"}, method = RequestMethod.GET)
 	public String getWindowsByRestaurant(@PathVariable String restaurant) {
@@ -46,6 +42,12 @@ public class RestRestaurantController {
 		return result;
 	}
 	
+	/**
+	 * 根据餐厅和窗口请求菜列表
+	 * @param restaurant 餐厅id
+	 * @param window 窗口id
+	 * @return
+	 */
 	@RequestMapping(value = {"/{restaurant}/windows/{window}"}, method = RequestMethod.GET)
 	public String getDishByRestaurantAndWindow(@PathVariable String restaurant,
 			@PathVariable String window) {
@@ -55,7 +57,7 @@ public class RestRestaurantController {
 	
 	/**
 	 * 添加菜
-	 * @param restaurant餐厅id
+	 * @param restaurant 餐厅id
 	 * @param name 菜名
 	 * @param description 菜的描述
 	 * @param price 菜的价格
@@ -64,7 +66,6 @@ public class RestRestaurantController {
 	 * @param token 用户身份
 	 * @param session
 	 * @return 菜添加结果(success/failure)
-	 * @throws IOException
 	 */
 	@RequestMapping(value = "/{restaurant}/windows/{window}", method = RequestMethod.POST)
 	public String addDish(@PathVariable String restaurant,

@@ -2,6 +2,13 @@ package cn.edu.bjtu.yb.restaurant.bean;
 
 import java.sql.Timestamp;
 
+/**
+ * <p>订单模型
+ * <p>包含一个订单的基本属性
+ * <p>订单id,客户id,所属窗口id,价格,下单时间,取餐时间,订单状态(0 刚刚下单,1 餐厅已开始准备食材,2 餐厅已做好，等待取餐,3 订单已完成,4 订单被取消)
+ * @author yb775
+ *
+ */
 public class DishOrder {
 
 	private String id;

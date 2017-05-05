@@ -12,6 +12,11 @@ import cn.edu.bjtu.yb.restaurant.dao.OrderDao;
 import cn.edu.bjtu.yb.restaurant.service.OrderService;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
+/**
+ * OrderService的具体实现
+ * @author 杨博
+ *
+ */
 @Component
 public class OrderServiceImpl implements OrderService {
 

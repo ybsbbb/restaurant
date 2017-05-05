@@ -20,11 +20,27 @@ public class WebRestaurantController {
 	@Autowired
 	RestaurantService service;
 
+	/**
+	 * <p>返回添加菜的页面
+	 * @return 添加菜页面
+	 */
 	@GetMapping("/adddish")
 	public String addDishPage() {
 		return "_adddish";
 	}	
 	
+	/**
+	 * 添加菜的WEB接口，不推荐，推荐通过ajax调用REST接口
+	 * @param restaurant
+	 * @param name
+	 * @param description
+	 * @param price
+	 * @param file
+	 * @param window
+	 * @param token
+	 * @param session
+	 * @return 添加菜的页面
+	 */
 	@PostMapping("/adddish")
 	public String addDish(@PathVariable String restaurant,
 			@RequestParam(value="name") String name,

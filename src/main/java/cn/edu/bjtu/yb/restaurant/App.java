@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * Hello world!
- *
+ * @author 杨博
+ * spring boot项目启动类
  */
 
 @SpringBootApplication

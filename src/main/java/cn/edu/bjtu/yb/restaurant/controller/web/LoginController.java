@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 
+	/**
+	 * 负责返回登录页面
+	 * @param token
+	 * @return 根据token验证结果，返回登录页面或HOME页面
+	 */
 	@RequestMapping({"/login"})
 	public String login(@CookieValue(value = "token", required = false) String token) {
 		if(token != null) {

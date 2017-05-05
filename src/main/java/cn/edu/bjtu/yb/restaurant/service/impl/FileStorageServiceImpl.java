@@ -8,6 +8,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.edu.bjtu.yb.restaurant.service.StorageService;
 
+/**
+ * 文件存储的具体实现
+ * @author 杨博
+ *
+ */
 @Component
 public class FileStorageServiceImpl implements StorageService {
 

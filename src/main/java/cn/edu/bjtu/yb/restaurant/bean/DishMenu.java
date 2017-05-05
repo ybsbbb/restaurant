@@ -1,5 +1,11 @@
 package cn.edu.bjtu.yb.restaurant.bean;
 
+/**
+ * <p>订单中的菜单模型
+ * <p>包括所属订单的id，所属窗口，菜id，份数
+ * @author 杨博
+ *
+ */
 public class DishMenu {
 
 	private String orderid;

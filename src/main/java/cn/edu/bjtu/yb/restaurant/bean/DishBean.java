@@ -1,14 +1,19 @@
 package cn.edu.bjtu.yb.restaurant.bean;
 
+/**
+ * 菜的模型，包含一个菜的所有属性
+ * @author 杨博
+ *
+ */
 public class DishBean {
 
 	private int id;
 	private String name;
 	private String description;
-	private String pic;
+	private String pic;//图片uri
 	private int price;
-	private int restaurant;
-	private int window;
+	private int restaurant;//所属餐厅
+	private int window;//所属窗口
 	public int getId() {
 		return id;
 	}

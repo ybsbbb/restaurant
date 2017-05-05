@@ -17,9 +17,20 @@ import cn.edu.bjtu.yb.restaurant.service.LoginService;
 @RequestMapping("/user")
 public class StudentController {
 	
+	/**
+	 * 登录注册的service
+	 */
 	@Autowired
 	private LoginService loginService;
 	
+	/**
+	 * 提交用户名密码，验证身份登录
+	 * @param username
+	 * @param password
+	 * @param response HttpResponse,用于添加COOKIE
+	 * @param httpsession HttpSession,用于存储token
+	 * @return 用户个人信息的JSON字符串
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String getUser(
 			@RequestParam(value = "username") String username,
@@ -36,6 +47,17 @@ public class StudentController {
 		return result;
 	}
 	
+	/**
+	 * 用户注册
+	 * @param username
+	 * @param password
+	 * @param name
+	 * @param age
+	 * @param gender
+	 * @param response
+	 * @param httpsession
+	 * @return 用户个人信息的JSON字符串
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public String addUser(
 			@RequestParam(value = "username") String username,

@@ -13,6 +13,11 @@ import cn.edu.bjtu.yb.restaurant.dao.StudentDao;
 import cn.edu.bjtu.yb.restaurant.service.LoginService;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
+/**
+ * LoginService的具体实现
+ * @author 杨博
+ *
+ */
 @Component
 public class LoginServiceImpl implements LoginService {
 

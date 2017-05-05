@@ -4,6 +4,11 @@ import org.apache.ibatis.jdbc.SQL;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 
+/**
+ * 生成SQL语句
+ * @author 杨博
+ *
+ */
 public class RestaurantProvider {
 
 	public String insertProvider(final DishBean dish) {

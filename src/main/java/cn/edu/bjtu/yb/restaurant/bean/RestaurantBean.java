@@ -1,12 +1,17 @@
 package cn.edu.bjtu.yb.restaurant.bean;
 
+/**
+ * <p>餐厅模型
+ * @author 杨博
+ *
+ */
 public class RestaurantBean {
 
 	private int id;
 	private String username;
 	private String password;
 	private String name;
-	private String pic;
+	private String pic;//餐厅图片uri，用于android客户端显示
 	public int getId() {
 		return id;
 	}
