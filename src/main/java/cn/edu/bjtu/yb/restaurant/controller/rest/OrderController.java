@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class OrderController {
 	 * @return 查询结果的JSON字符串
 	 */
 	@GetMapping("/orders/user/{userid}")//简略信息 id&price&ordertime
-	public String getOrdersByUser() {
+	public String getOrdersByUser(@PathParam("userid") String userid) {
 		return null;
 	}
 
@@ -46,7 +48,7 @@ public class OrderController {
 	 * @return 查询结果的JSON字符串
 	 */
 	@GetMapping("/orders/restaurant/{restaurantid}")//简略信息 id&price&ordertime
-	public String getOrdersByRestaurant() {
+	public String getOrdersByRestaurant(@PathParam("restaurantid") String restaurantid) {
 		return null;
 	}
 
@@ -55,7 +57,7 @@ public class OrderController {
 	 * @return 订单详情的json字符串
 	 */
 	@GetMapping("/orders/order/{orderid}")//详细信息
-	public String getOrdersById() {
+	public String getOrdersById(@PathParam("orderid") String orderid) {
 		return null;
 	}
 	

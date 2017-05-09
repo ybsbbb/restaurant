@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishMenu;
@@ -28,11 +29,24 @@ public interface OrderDao {
 	 * @return
 	 */
 	public int insertMenus(List<DishMenu> menu);
+	
+	@Select("select id, price, ordertime from dishorder where customer = #{userid}")
+	public List<DishOrder> getOrdersByUser(@Param("userid") String userid);
+
+	@Select("select id, price, ordertime from dishorder where restaurant = #{restaurantid}")
+	public List<DishOrder> getOrdersByRestaurant(@Param("restaurantid") String restaurantid);
+
+	@Select("select * from dishorder where id = #{id}")
+	public DishOrder getOrderById(@Param("id") String id);
+
+	@Select("select * from dishmenu where orderid = #{orderid}")
+	public List<DishMenu> getMenusByOrder(@Param("orderid") String orderid);
 
 	public static void main(String[] args) throws IOException {
 		SqlSession s = SqlUtil.getSession();
 		@SuppressWarnings("unused")
 		OrderDao o = s.getMapper(OrderDao.class);
+		
 		s.commit();
 		s.close();
 	}
