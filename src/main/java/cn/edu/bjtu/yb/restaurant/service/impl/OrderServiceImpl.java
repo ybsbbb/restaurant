@@ -58,5 +58,25 @@ public class OrderServiceImpl implements OrderService {
 		return result;
 	}
 
+	@Override
+	public String getOrdersByUser(String uid) {
+		return null;
+	}
+
+	@Override
+	public String getOrdersByRestaurant(String rid) {
+		return null;
+	}
+
+	@Override
+	public String getOrderById(String id) {
+		return null;
+	}
+
+	@Override
+	public String getMenusByOrderId(String oid) {
+		return null;
+	}
+
 	
 }

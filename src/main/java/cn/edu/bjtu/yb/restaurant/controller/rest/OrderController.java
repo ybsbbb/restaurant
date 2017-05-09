@@ -40,7 +40,8 @@ public class OrderController {
 	 */
 	@GetMapping("/orders/user/{userid}")//简略信息 id&price&ordertime
 	public String getOrdersByUser(@PathParam("userid") String userid) {
-		return null;
+		String result = orderService.getOrdersByUser(userid);
+		return result;
 	}
 
 	/**
@@ -49,7 +50,8 @@ public class OrderController {
 	 */
 	@GetMapping("/orders/restaurant/{restaurantid}")//简略信息 id&price&ordertime
 	public String getOrdersByRestaurant(@PathParam("restaurantid") String restaurantid) {
-		return null;
+		String result = orderService.getOrdersByRestaurant(restaurantid);
+		return result;
 	}
 
 	/**
@@ -58,7 +60,8 @@ public class OrderController {
 	 */
 	@GetMapping("/orders/order/{orderid}")//详细信息
 	public String getOrdersById(@PathParam("orderid") String orderid) {
-		return null;
+		String result = orderService.getOrderById(orderid);
+		return result;
 	}
 	
 	/**

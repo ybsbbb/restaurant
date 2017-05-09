@@ -23,4 +23,29 @@ public interface OrderService {
 	 * @return 大于或等于1表示成功
 	 */
 	public int addDishMenu(List<DishMenu> dm);
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	public String getOrdersByUser(String uid);
+	/**
+	 * 
+	 * @param rid
+	 * @return
+	 */
+	public String getOrdersByRestaurant(String rid);
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String getOrderById(String id);
+	/**
+	 * 
+	 * @param oid
+	 * @return
+	 */
+	public String getMenusByOrderId(String oid);
+	
 }
