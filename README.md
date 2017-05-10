@@ -69,4 +69,27 @@ taketime：取餐时间，是一个时间格式的字符串 yyyy-mm-dd hh:MM:ss.
 1.下单成功：返回订单号  
 2.下单失败：返回""  
   
+7.[ip]:8080/orders/user/{userid}  
+*请求类型*：GET  
+*参数*：  
+userid 路径变量  用户id
+*返回*：  
+查询结果， JSONArray eg:[{"price":1,"id":"201705041713320000","ordertime":"2017-05-04 17:13:33.0"},{"price":1000,"id":"201705051040420000","ordertime":"2017-05-05 10:40:43.0"}]  
+这是订单简要信息  
 
+8.[ip]:8080/orders/restaurant/{restaurantid}  
+*请求类型*：GET  
+*参数*：  
+restaurantid 路径变量  餐厅id
+*返回*：  
+查询结果， JSONArray eg:[{"price":1,"id":"201705041713320000","ordertime":"2017-05-04 17:13:33.0"},{"price":1000,"id":"201705051040420000","ordertime":"2017-05-05 10:40:43.0"}]  
+这是订单简要信息
+
+
+9.[ip]:8080/orders/order/{id}  
+*请求类型*：GET  
+*参数*：  
+id 路径变量  订单id
+*返回*：  
+查询结果， JSONObject eg:{"taketime":"2017-05-05 11:11:11.0","price":1,"restaurant":1,"id":"201705041713320000","state":0,"ordertime":"2017-05-04 17:13:33.0","menu":"[{\"number\":1,\"dish\":1,\"window\":1},{\"number\":2,\"dish\":2,\"window\":2}]","customer":"test"}  
+这是订单详细信息

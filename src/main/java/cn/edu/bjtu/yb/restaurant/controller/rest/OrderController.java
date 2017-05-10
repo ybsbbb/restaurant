@@ -4,12 +4,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +38,9 @@ public class OrderController {
 	 * @return 查询结果的JSON字符串
 	 */
 	@GetMapping("/orders/user/{userid}")//简略信息 id&price&ordertime
-	public String getOrdersByUser(@PathParam("userid") String userid) {
+	public String getOrdersByUser(@PathVariable String userid) {
 		String result = orderService.getOrdersByUser(userid);
+		System.out.println(userid);
 		return result;
 	}
 
@@ -49,7 +49,7 @@ public class OrderController {
 	 * @return 查询结果的JSON字符串
 	 */
 	@GetMapping("/orders/restaurant/{restaurantid}")//简略信息 id&price&ordertime
-	public String getOrdersByRestaurant(@PathParam("restaurantid") String restaurantid) {
+	public String getOrdersByRestaurant(@PathVariable String restaurantid) {
 		String result = orderService.getOrdersByRestaurant(restaurantid);
 		return result;
 	}
@@ -59,7 +59,7 @@ public class OrderController {
 	 * @return 订单详情的json字符串
 	 */
 	@GetMapping("/orders/order/{orderid}")//详细信息
-	public String getOrdersById(@PathParam("orderid") String orderid) {
+	public String getOrdersById(@PathVariable String orderid) {
 		String result = orderService.getOrderById(orderid);
 		return result;
 	}
