@@ -72,6 +72,8 @@ public class OrderServiceImpl implements OrderService {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.close();
 		}
 		JSONArray ja = new JSONArray();
 		for(DishOrder dor : dors) {
@@ -97,6 +99,8 @@ public class OrderServiceImpl implements OrderService {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.close();
 		}
 		JSONArray ja = new JSONArray();
 		for(DishOrder dor : dors) {
@@ -122,6 +126,8 @@ public class OrderServiceImpl implements OrderService {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.close();
 		}
 		JSONObject jo = new JSONObject();
 		jo.put("id", dor.getId());
@@ -148,6 +154,8 @@ public class OrderServiceImpl implements OrderService {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.close();
 		}
 		JSONArray ja = new JSONArray();
 		for(DishMenu menu : menus) {
@@ -159,6 +167,50 @@ public class OrderServiceImpl implements OrderService {
 		}
 		System.out.println(ja);
 		return ja.toString();
+	}
+	
+	@Override
+	public String changeOrderState(String oid, String state) {
+		SqlSession session = null;
+		OrderDao od = null;
+		DishOrder dor = null;
+		try {
+			session = SqlUtil.getSession();
+			od = session.getMapper(OrderDao.class);
+			dor = od.getOrderById(oid);
+			switch(state) {
+			case "1"://准备食材
+				if(dor.getState() == 0) {
+					od.updateOrderState(state, oid);
+					return state;
+				}
+				break;
+			case "2"://已做好
+				if(dor.getState() == 1) {
+					od.updateOrderState(state, oid);
+					return state;
+				}
+				break;
+			case "3"://订单完成
+				if(dor.getState() == 2) {
+					od.updateOrderState(state, oid);
+					return state;
+				}
+				break;
+			case "4"://订单取消
+				if(dor.getState() == 0) {
+					od.updateOrderState(state, oid);
+					return state;
+				}
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+		return "fail";
 	}
 	
 	public static void main(String[] args) {

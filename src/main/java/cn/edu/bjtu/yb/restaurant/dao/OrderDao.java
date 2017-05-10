@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishMenu;
@@ -42,6 +43,9 @@ public interface OrderDao {
 	@Select("select * from dishmenu where orderid = #{orderid}")
 	public List<DishMenu> getMenusByOrder(@Param("orderid") String orderid);
 
+	@Update("update dishorder set state = #{state} where id = #{id}")
+	public int updateOrderState(@Param("state") String state,@Param("id") String id);
+	
 	public static void main(String[] args) throws IOException {
 		SqlSession s = SqlUtil.getSession();
 		@SuppressWarnings("unused")

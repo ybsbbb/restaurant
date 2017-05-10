@@ -34,8 +34,9 @@ public class OrderController {
 	private OrderService orderService;	
 	
 	/**
-	 * 根据用户id查询用户订单
-	 * @return 查询结果的JSON字符串
+	 * 根据用户查询所有订单
+	 * @param userid 用户名
+	 * @return 订单List的JSONArray，简略信息
 	 */
 	@GetMapping("/orders/user/{userid}")//简略信息 id&price&ordertime
 	public String getOrdersByUser(@PathVariable String userid) {
@@ -46,7 +47,8 @@ public class OrderController {
 
 	/**
 	 * 根据餐厅id查询订单
-	 * @return 查询结果的JSON字符串
+	 * @param restaurantid 餐厅id
+	 * @return 订单List的JSONArray，简略信息
 	 */
 	@GetMapping("/orders/restaurant/{restaurantid}")//简略信息 id&price&ordertime
 	public String getOrdersByRestaurant(@PathVariable String restaurantid) {
@@ -56,7 +58,8 @@ public class OrderController {
 
 	/**
 	 * 根据订单号查询订单详情
-	 * @return 订单详情的json字符串
+	 * @param orderid 订单号
+	 * @return 订单详情的JSONObject
 	 */
 	@GetMapping("/orders/order/{orderid}")//详细信息
 	public String getOrdersById(@PathVariable String orderid) {
@@ -109,6 +112,15 @@ public class OrderController {
 			return "fail";
 		}
 		return orderid;
+	}
+	
+	@PostMapping("/orders/{orderid}/state")
+	public String changeOrderState(
+			@PathVariable String orderid,
+			@RequestParam("state") String state
+			) {
+		String result = orderService.changeOrderState(orderid, state);
+		return result;
 	}
 
 	public static void main(String[] args) {

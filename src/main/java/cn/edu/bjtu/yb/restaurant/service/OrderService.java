@@ -47,5 +47,12 @@ public interface OrderService {
 	 * @return
 	 */
 	public String getMenusByOrderId(String oid);
+	/**
+	 * 
+	 * @param oid
+	 * @param state
+	 * @return
+	 */
+	public String changeOrderState(String oid, String state);
 	
 }
