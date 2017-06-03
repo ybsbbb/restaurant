@@ -35,6 +35,14 @@ public interface OrderService {
 	 * @return
 	 */
 	public String getOrdersByRestaurant(String rid);
+	
+	/**
+	 * 
+	 * @param rid
+	 * @param state
+	 * @return
+	 */
+	public List<DishOrder> getOrdersByRestaurantAndState(String rid, int state);
 	/**
 	 * 
 	 * @param id

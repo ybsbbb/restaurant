@@ -24,7 +24,7 @@ public class IndexController {
 		if(token != null) {
 			return "forward:home";
 		}
-		return "_login";
+		return "tlogin";
 	}
 	
 }

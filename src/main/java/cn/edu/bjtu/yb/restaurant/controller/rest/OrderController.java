@@ -79,6 +79,9 @@ public class OrderController {
 			@RequestParam("order") String order,
 			@RequestParam("username") String username
 			) {
+		
+		System.out.println("你有新的订单：" + username + " order：" + order);
+		
 		JSONObject jo = new JSONObject(order);
 		JSONArray ja = (JSONArray)jo.get("menu");
 		DishOrder dor = new DishOrder();
@@ -97,9 +100,9 @@ public class OrderController {
 			JSONObject tmp = (JSONObject)ja.get(i);
 			DishMenu dm = new DishMenu();
 			dm.setOrderid(orderid);
-			dm.setWindow(Integer.parseInt((String) tmp.get("window")));
-			dm.setDish(Integer.parseInt((String) tmp.get("dish")));
-			dm.setNumber(Integer.parseInt((String) tmp.get("number")));
+			dm.setWindow((Integer)tmp.get("window"));
+			dm.setDish((Integer)tmp.get("dish"));
+			dm.setNumber((Integer)tmp.get("number"));
 			dmlist.add(dm);
 		}
 		

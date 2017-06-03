@@ -115,6 +115,30 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<DishOrder> getOrdersByRestaurantAndState(String rid, int state) {
+		SqlSession session = null;
+		List<DishOrder> dors = null;
+		OrderDao od = null;
+		try {
+			session = SqlUtil.getSession();
+			od = session.getMapper(OrderDao.class);
+			dors = od.getOrdersByRestaurantAndState(rid,state);
+			if(state == 1){
+				List<DishOrder> tdors = od.getOrdersByRestaurantAndState(rid,2);
+				for(DishOrder d : tdors){
+					dors.add(d);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+		return dors;
+	}
+
+	@Override
 	public String getOrderById(String id) {
 		SqlSession session = null;
 		DishOrder dor = null;

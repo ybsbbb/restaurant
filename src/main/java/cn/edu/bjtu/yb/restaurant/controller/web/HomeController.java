@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
 import cn.edu.bjtu.yb.restaurant.bean.WindowBean;
 import cn.edu.bjtu.yb.restaurant.service.LoginService;
@@ -61,15 +60,11 @@ public class HomeController {
 				RestaurantBean res = (RestaurantBean) httpsession.getAttribute("res");
 				model.addAttribute("restaurant", res);
 				List<WindowBean> windows = restaurantservice.getWindowListObject(res.getId() + "");
-				for(WindowBean wb : windows){
-					List<DishBean> db = restaurantservice.getDishListObject(res.getId() + "", wb.getId() + "");
-					wb.setDishes(db);
-				}
 				model.addAttribute("windows", windows);
-				return "_home";
+				return "tbackground";
 			}
 		}
-		return "_login";
+		return "tlogin";
 	}
 	
 	/**
@@ -103,13 +98,10 @@ public class HomeController {
 			Cookie _token = new Cookie("token", res.getId() + "");
 			response.addCookie(_token);
 			List<WindowBean> windows = restaurantservice.getWindowListObject(res.getId() + "");
-			for(WindowBean wb : windows){
-				List<DishBean> db = restaurantservice.getDishListObject(res.getId() + "", wb.getId() + "");
-				wb.setDishes(db);
-			}
+			httpsession.setAttribute("windows", windows);
 			model.addAttribute("windows", windows);
-			return "_home";
+			return "tbackground";
 		}
-		return "_login";
+		return "tlogin";
 	}
 }

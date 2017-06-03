@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TEST {
 
+	@RequestMapping("/timer")
+	public String timer() {
+		return "_timer";
+	}
+	
 	@RequestMapping("/stu")
 	public String student(){
 		return "_stu";

@@ -1,9 +1,12 @@
 package cn.edu.bjtu.yb.restaurant.controller.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishBean;
+import cn.edu.bjtu.yb.restaurant.bean.DishOrder;
+import cn.edu.bjtu.yb.restaurant.service.OrderService;
 import cn.edu.bjtu.yb.restaurant.service.RestaurantService;
 
 @Controller
@@ -19,6 +24,8 @@ public class WebRestaurantController {
 
 	@Autowired
 	RestaurantService service;
+	@Autowired
+	OrderService orderservice;
 
 	/**
 	 * <p>返回添加菜的页面
@@ -63,4 +70,26 @@ public class WebRestaurantController {
 		}
 		return "_adddish";
 	}
+	
+	/**
+	 * web端查看窗口详细信息
+	 * @param restaurant 餐厅id
+	 * @param window 窗口id
+	 * @param httpsession
+	 * @param model
+	 * @return 渲染好的页面
+	 */
+	@GetMapping("/dishlist")
+	public String getDishList(
+			@RequestParam(value="restaurant") String restaurant,
+			@RequestParam(value="window") String window,
+			HttpSession httpsession,
+			Model model){
+		model.addAttribute("restaurant",httpsession.getAttribute("res"));
+		model.addAttribute("windows", httpsession.getAttribute("windows"));
+		List<DishBean> dlist = service.getDishListObject(restaurant, window);
+		model.addAttribute("dishes", dlist);
+		return "/html/background/Windows_1";
+	}
+
 }

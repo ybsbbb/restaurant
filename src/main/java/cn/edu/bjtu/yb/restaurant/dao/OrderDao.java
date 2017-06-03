@@ -37,6 +37,9 @@ public interface OrderDao {
 	@Select("select id, price, ordertime from dishorder where restaurant = #{restaurantid}")
 	public List<DishOrder> getOrdersByRestaurant(@Param("restaurantid") String restaurantid);
 
+	@Select("select id, price, ordertime from dishorder where restaurant = #{restaurantid} and state = #{state}")
+	public List<DishOrder> getOrdersByRestaurantAndState(@Param("restaurantid") String restaurantid,@Param("state") int state);
+
 	@Select("select * from dishorder where id = #{id}")
 	public DishOrder getOrderById(@Param("id") String id);
 

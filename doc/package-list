@@ -1,0 +1,10 @@
+cn.edu.bjtu.yb.restaurant
+cn.edu.bjtu.yb.restaurant.bean
+cn.edu.bjtu.yb.restaurant.configuration
+cn.edu.bjtu.yb.restaurant.controller.rest
+cn.edu.bjtu.yb.restaurant.controller.web
+cn.edu.bjtu.yb.restaurant.dao
+cn.edu.bjtu.yb.restaurant.dao.sqlprovider
+cn.edu.bjtu.yb.restaurant.service
+cn.edu.bjtu.yb.restaurant.service.impl
+cn.edu.bjtu.yb.restaurant.util

@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+	<p>REST接口</p>
+	<form action="/orders/order" method="POST">
+		餐厅：<input type="text" name="restaurant" /><br/>
+		价格：<input type="text" name="price" /><br/>
+		取餐时间：<input type="text" name="taketime" /><br/>
+		提交：<input id="submit" type="button" value="提交" /><br/>
+	</form>
+	<div id="adddish">
+		窗口：<input name="window" type="text"/><br/>
+		菜名：<input name="dish" type="text"/><br/>
+		数量：<input name="number" type="text"/><br/>
+		<input id="add" type="button" value="添加"/>
+	</div>
+	<div id="order-show"></div>
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script>
+		var order = {};
+		var dishlist = [];
+		order["menu"] = dishlist;
+		$("input[name='restaurant']").change(function() {
+			order["restaurant"] = $("input[name='restaurant']").val();
+		});
+		$("input[name='price']").change(function() {
+			order["price"] = $("input[name='price']").val();			
+		});
+		$("input[name='taketime']").change(function() {
+			order["taketime"] = $("input[name='taketime']").val();			
+		});
+		$("#add").click(function() {
+			var dishobj = {};
+			var window = $("input[name='window']");
+			var dish = $("input[name='dish']");
+			var number = $("input[name='number']");
+			dishobj["window"] = window.val();
+			dishobj["dish"] = dish.val();
+			dishobj["number"] = number.val();
+			dishlist.push(dishobj);
+			$("#order-show").html(JSON.stringify(order));
+		});
+		$("#submit").click(function() {
+			$.post("/orders/order",
+					{
+						order: JSON.stringify(order),
+						username: "test"
+					},
+					function(status,data) {
+						alert(status + " " + data);
+					}
+			);
+			return false;
+		});
+	</script>
+</body>
+</html>
