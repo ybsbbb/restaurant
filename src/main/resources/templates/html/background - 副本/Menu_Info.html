@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>菜单信息</title>
+	<link rel="stylesheet" href="../../css/background/amazeui.css" />
+	<link rel="stylesheet" href="../../css/background/core.css" />
+	<link rel="stylesheet" href="../../css/background/menu.css" />
+	<link rel="stylesheet" href="../../css/background/index.css" />
+	<link rel="stylesheet" href="../../css/background/admin.css" />
+	<link rel="stylesheet" href="../../css/baclground/page/typography.css" />
+	<link rel="stylesheet" href="../../css/background/page/form.css" />
+	<link rel="stylesheet" href="../../css/background/component.css" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+<body>
+	<!-- Begin page -->
+		<header class="am-topbar am-topbar-fixed-top">		
+			<div class="am-topbar-left am-hide-sm-only">
+                <a href="../../background.html" class="logo"><span>管理员</span><i class="zmdi zmdi-layers"></i></a>
+            </div>
+	
+			<div class="contain">
+				<ul class="am-nav am-navbar-nav am-navbar-left">
+					<li><h4 class="page-title">菜单信息</h4></li>
+				</ul>
+				<ul class="am-nav am-navbar-nav am-navbar-right">
+					<li class="inform"><i class="am-icon-bell-o" aria-hidden="true"></i></li>
+					<li class="hidden-xs am-hide-sm-only">
+                        <form role="search" class="app-search">
+                            <input type="text" placeholder="Search..." class="form-control">
+                            <a href=""><img src="../../img/background/search.png"></a>
+                        </form>
+                    </li>
+				</ul>
+			</div>
+		</header>
+		<!-- end page -->
+		
+		<div class="admin">
+			<!--<div class="am-g">-->
+		<!-- ========== Left Sidebar Start ========== -->
+            <!-- sidebar start -->
+			<div class="admin-sidebar am-offcanvas  am-padding-0" id="admin-offcanvas">
+			    <div class="am-offcanvas-bar admin-offcanvas-bar">
+			    	<!-- User -->
+					<div class="user-box am-hide-sm-only">
+	                     <div class="user-img">
+	                          <img src="../../img/background/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
+	                          <div class="user-status offline"><i class="am-icon-dot-circle-o" aria-hidden="true"></i></div>
+	                      </div>
+	                      <h5><a href="#">用户名</a></h5>
+	                      <ul class="list-inline">
+	                      	<li>
+	                           <a href="#">
+	                        	   <i class="fa fa-cog" aria-hidden="true"></i>
+	                           </a>
+	                        </li>
+	                        <li>
+	                           <a href="#" class="text-custom">
+	                                <i class="fa fa-cog" aria-hidden="true"></i>
+	                           </a>
+	                        </li>
+	                      </ul>
+	                </div>
+	          <!-- End User -->
+	          	<ul class="am-list admin-sidebar-list">
+				    <li><a href="../../background.html"><span class="am-icon-home"></span> 首页</a></li>
+				    	<li class="admin-parent">
+				    	<a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span class="am-icon-table"></span> 菜品信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+				    	<ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav1">
+				    	    <li><a href="Menu_Info.html" class="am-cf"> 菜单信息</span></a></li>
+				    	    <li><a href="Sales_status.html">销售情况</a></li>
+				    	</ul>
+				    	</li>
+				    	<li class="admin-parent">
+							<a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><i class="am-icon-line-chart" aria-hidden="true"></i> 订单信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+							<ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
+							    <li><a href="Open_orders.html" class="am-cf"> 未接订单</span></a></li>
+							    <li><a href="Recevied_order.html" class="am-cf"> 已接订单</span></a></li>
+							    <li><a href="Order_processing.html" class="am-cf"> 订单处理</span></a></li>
+							</ul>
+						</li>
+						<li class="admin-parent">
+						    <a class="am-cf" data-am-collapse="{target: '#collapse-nav5'}"><span class="am-icon-file"></span> 本店信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+						    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5">
+							    <li><a href="Store_Info.html" class="am-cf"> 店铺信息</a></li>
+						        <li><a href="Financial_Info.html">营销情况</a></li>   
+						    </ul>
+						</li>
+				</ul>
+				</div>
+			</div>
+		<!-- sidebar end -->
+    
+		<!--	<div class="am-g">-->
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div class="card-box">
+					<!-- Row start -->
+					<div class="am-g">
+						<div class="am-u-sm-12 am-u-md-6">
+				          <div class="am-btn-toolbar">
+				            <div class="am-btn-group am-btn-group-xs">
+				              <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+				              <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
+				              <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 审核</button>
+				              <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
+				            </div>
+				          </div>
+				        </div>
+				    	<div class="am-u-sm-12 am-u-md-3">
+				        	<div class="am-input-group am-input-group-sm">
+				            	<input type="text" class="am-form-field">
+				          	<span class="am-input-group-btn">
+				          		<button class="am-btn am-btn-default" type="button">搜索</button>
+				          	</span>
+				          	</div>
+				    	</div>
+				    </div>
+					<!-- Row end -->
+					<!-- Row start --><!-- 遍历输出菜单数据 -->
+					<div class="am-g">
+        				<div class="am-u-sm-12">
+          					<form class="am-form">
+            					<table class="am-table am-table-striped am-table-hover table-main">
+              						<thead>
+              						<tr>
+                						<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">作者</th><th class="table-date am-hide-sm-only">修改日期</th><th class="table-set">操作</th>
+              						</tr>
+              						</thead>
+              						<tbody>
+              						<tr>
+                						<td><input type="checkbox" /></td>
+                						<td>1</td>
+                						<td><a href="#">Business management</a></td>
+                						<td>default</td>
+                						<td class="am-hide-sm-only">测试1号</td>
+                						<td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                						<td>
+                  							<div class="am-btn-toolbar">
+                    							<div class="am-btn-group am-btn-group-xs">
+                      								<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                      								<button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
+                      								<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    							</div>
+                  							</div>
+                						</td>
+              						</tr>
+              						<tr>
+                						<td><input type="checkbox" /></td>
+                						<td>2</td>
+                						<td><a href="#">Business management</a></td>
+                						<td>default</td>
+                						<td class="am-hide-sm-only">测试1号</td>
+                						<td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                						<td>
+                  							<div class="am-btn-toolbar">
+                    							<div class="am-btn-group am-btn-group-xs">
+                      								<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                      								<button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
+                      								<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    							</div>
+                  							</div>
+                						</td>
+              						</tr>
+              						<tr>
+                						<td><input type="checkbox" /></td>
+                						<td>3</td>
+             						   	<td><a href="#">Business management</a></td>
+                						<td>default</td>
+                						<td class="am-hide-sm-only">测试1号</td>
+                						<td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                						<td>
+                  							<div class="am-btn-toolbar">
+                    							<div class="am-btn-group am-btn-group-xs">
+                      								<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                      								<button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
+                      								<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    							</div>
+                 	 						</div>
+                						</td>
+              						</tr>
+              						</tbody>
+            					</table>
+            			<div class="am-cf">
+              			共 3条记录
+              			<div class="am-fr">
+                			<ul class="am-pagination">
+                  				<li class="am-disabled"><a href="#">«</a></li>
+                  				<li class="am-active"><a href="#">1</a></li>
+                  				<li><a href="#">2</a></li>
+                  				<li><a href="#">3</a></li>
+                  				<li><a href="#">4</a></li>
+                  				<li><a href="#">5</a></li>
+                  				<li><a href="#">»</a></li>
+                			</ul>
+              			</div>
+            		</div>
+            		<hr />
+            		<p>注：.....</p>
+          			</form>
+       	 			</div>
+       	 			</div>
+					<!-- Row end -->
+			    </div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../js/background/jquery-2.1.0.js" ></script>
+	<script type="text/javascript" src="../../js/background/amazeui.min.js"></script>
+	<script type="text/javascript" src="../../js/background/app.js" ></script>
+	<script type="text/javascript" src="../../js/background/blockUI.js" ></script>
+</body>
+</html>

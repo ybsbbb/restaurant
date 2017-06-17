@@ -31,7 +31,7 @@ public interface OrderDao {
 	 */
 	public int insertMenus(List<DishMenu> menu);
 	
-	@Select("select id, price, ordertime from dishorder where customer = #{userid}")
+	@Select("select id, price, ordertime, state from dishorder where customer = #{userid} order by state asc,ordertime desc")
 	public List<DishOrder> getOrdersByUser(@Param("userid") String userid);
 
 	@Select("select id, price, ordertime from dishorder where restaurant = #{restaurantid}")

@@ -3,9 +3,11 @@ package cn.edu.bjtu.yb.restaurant.dao;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishBean;
@@ -15,6 +17,14 @@ import cn.edu.bjtu.yb.restaurant.dao.sqlprovider.RestaurantProvider;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
 public interface RestaurantDao {
+	
+	@Select("SELECT * FROM window WHERE id=#{id}")
+	public WindowBean queryWindowById(@Param("id") int id);
+	@Select("SELECT * FROM restaurant WHERE id=#{id}")
+	public RestaurantBean queryRestaurantById(@Param("id")int id);
+	
+	@Select("SELECT * FROM dish WHERE id=#{dishid}")
+	public DishBean queryDishBean(@Param("dishid")int dishid);
 	/**
 	 * 查询餐厅信息，用于餐厅用户登录
 	 * @param username
@@ -55,6 +65,10 @@ public interface RestaurantDao {
 	 */
 	@InsertProvider(method = "insertProvider", type=RestaurantProvider.class)
 	public int insertOne(DishBean dish);
+	
+	@Update("UPDATE dish SET name=#{dish.name},")
+	public int updateOne(@Param("dish") DishBean dish);
+	
 	public static void main(String[] args) throws IOException{
 		SqlSession session = SqlUtil.getSession();
 		RestaurantDao dao = session.getMapper(RestaurantDao.class);

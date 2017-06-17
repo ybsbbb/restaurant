@@ -148,6 +148,36 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
+	public int editDish(DishBean dish, MultipartFile file) {
+		SqlSession session = null;
+		RestaurantDao dao = null;
+		DishBean oridb = null;
+		try{
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			oridb = dao.queryDishBean(dish.getId());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		String filePath = "D:/RESOURCES/STATIC/IMG/DISH/";
+		String resourcePath = "/img/dish/";
+		String originalName = file.getOriginalFilename();
+		String fileName = oridb.getRestaurant() //菜样图命名：餐厅+窗口+菜名+后缀
+				+ oridb.getWindow() 
+				+ dish.getName() 
+				+ originalName.substring(originalName.lastIndexOf('.'));
+		File dest = new File(filePath + fileName);
+		storageService.store(dest, file);
+		
+		dish.setPic(resourcePath + fileName);
+		int result = 0;
+		result = dao.insertOne(dish);
+		session.commit();
+		session.close();
+		return result;
+	}
+
+	@Override
 	public String getWindowListJSON(String restaurant) {
 		JSONArray ja = new JSONArray();
 		SqlSession session = null;
@@ -195,9 +225,29 @@ public class RestaurantServiceImpl implements RestaurantService {
 		}
 		return beanlist;
 	}
+	
+	
 	public static void main(String[] args) throws IOException{
 		RestaurantServiceImpl rsi = new RestaurantServiceImpl();
 		rsi.getDishListJSON("1","1");
+	}
+
+	@Override
+	public DishBean getDishBean(String dishid) {
+		SqlSession session = null;
+		RestaurantDao dao = null;
+		int dishId = Integer.parseInt(dishid);
+		DishBean db = null;
+		try {
+			session = SqlUtil.getSession();
+			dao = session.getMapper(RestaurantDao.class);
+			db = dao.queryDishBean(dishId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			SqlUtil.closeSession(session);
+		}
+		return db;
 	}
 
 }

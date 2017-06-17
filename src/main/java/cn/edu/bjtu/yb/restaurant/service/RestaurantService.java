@@ -14,6 +14,7 @@ import cn.edu.bjtu.yb.restaurant.bean.WindowBean;
  */
 public interface RestaurantService {
 
+	public DishBean getDishBean(String dishid);
 	/**
 	 * 获取餐厅列表
 	 * @return 餐厅列表JSON
@@ -49,6 +50,14 @@ public interface RestaurantService {
 	 * @return
 	 */
 	public int addDish(DishBean dish, MultipartFile file);
+	
+	/**
+	 * 
+	 * @param dish
+	 * @param file
+	 * @return
+	 */
+	public int editDish(DishBean dish, MultipartFile file);
 	
 	/**
 	 * 根据窗口、餐厅获取菜列表的List

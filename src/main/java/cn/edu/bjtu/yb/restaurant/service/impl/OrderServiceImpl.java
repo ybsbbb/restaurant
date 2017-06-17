@@ -8,9 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import cn.edu.bjtu.yb.restaurant.bean.DishBean;
 import cn.edu.bjtu.yb.restaurant.bean.DishMenu;
 import cn.edu.bjtu.yb.restaurant.bean.DishOrder;
+import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
+import cn.edu.bjtu.yb.restaurant.bean.WindowBean;
 import cn.edu.bjtu.yb.restaurant.dao.OrderDao;
+import cn.edu.bjtu.yb.restaurant.dao.RestaurantDao;
 import cn.edu.bjtu.yb.restaurant.service.OrderService;
 import cn.edu.bjtu.yb.restaurant.util.SqlUtil;
 
@@ -81,6 +85,7 @@ public class OrderServiceImpl implements OrderService {
 			jo.put("id", dor.getId());
 			jo.put("price", dor.getPrice());
 			jo.put("ordertime", dor.getOrdertime());
+			jo.put("state", dor.getState());
 			ja.put(jo);
 		}
 		System.out.println(ja);
@@ -143,26 +148,28 @@ public class OrderServiceImpl implements OrderService {
 		SqlSession session = null;
 		DishOrder dor = null;
 		OrderDao od = null;
+		RestaurantDao rd = null;
 		try {
 			session = SqlUtil.getSession();
 			od = session.getMapper(OrderDao.class);
+			rd = session.getMapper(RestaurantDao.class);
 			dor = od.getOrderById(id);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
-		} finally {
-			session.close();
 		}
 		JSONObject jo = new JSONObject();
 		jo.put("id", dor.getId());
 		jo.put("price", dor.getPrice());
 		jo.put("ordertime", dor.getOrdertime());
-		jo.put("restaurant", dor.getRestaurant());
+		RestaurantBean rb = rd.queryRestaurantById(dor.getRestaurant());
+		jo.put("restaurant", rb.getName());
 		jo.put("state", dor.getState());
 		jo.put("customer", dor.getCustomer());
 		jo.put("taketime", dor.getTaketime());
 		jo.put("menu", getMenusByOrderId(dor.getId()).toString());
 		System.out.println(jo);
+		session.close();
 		return jo.toString();
 	}
 
@@ -171,24 +178,27 @@ public class OrderServiceImpl implements OrderService {
 		SqlSession session = null;
 		List<DishMenu> menus = null;
 		OrderDao od = null;
+		RestaurantDao rd = null;
 		try {
 			session = SqlUtil.getSession();
 			od = session.getMapper(OrderDao.class);
+			rd = session.getMapper(RestaurantDao.class);
 			menus = od.getMenusByOrder(oid);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
-		} finally {
-			session.close();
 		}
 		JSONArray ja = new JSONArray();
 		for(DishMenu menu : menus) {
 			JSONObject jo = new JSONObject();
-			jo.put("dish", menu.getDish());
+			DishBean tmpd = rd.queryDishBean(menu.getDish());
+			WindowBean tmpw = rd.queryWindowById(menu.getWindow());
+			jo.put("dish", tmpd.getName());
 			jo.put("number", menu.getNumber());
-			jo.put("window", menu.getWindow());
+			jo.put("window", tmpw.getName());
 			ja.put(jo);
 		}
+		session.close();
 		System.out.println(ja);
 		return ja.toString();
 	}

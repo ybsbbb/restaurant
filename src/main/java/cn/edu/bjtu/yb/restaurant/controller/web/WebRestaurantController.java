@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.edu.bjtu.yb.restaurant.bean.DishBean;
-import cn.edu.bjtu.yb.restaurant.bean.DishOrder;
+import cn.edu.bjtu.yb.restaurant.bean.RestaurantBean;
 import cn.edu.bjtu.yb.restaurant.service.OrderService;
 import cn.edu.bjtu.yb.restaurant.service.RestaurantService;
 
@@ -34,7 +34,42 @@ public class WebRestaurantController {
 	@GetMapping("/adddish")
 	public String addDishPage() {
 		return "_adddish";
-	}	
+	}
+	
+	/**
+	 * 
+	 * @param dishid
+	 * @param windowid
+	 * @param restaurantid
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/editdish")
+	public String getEditPage(
+			@RequestParam(value="dishid") String dishid,
+			Model model){
+		DishBean db = service.getDishBean(dishid);
+		model.addAttribute("dish", db);
+		return "html/background/EditFood";
+	}
+	
+	@PostMapping("/editdish")
+	public String updateEdit(
+			@RequestParam(value="id") int id,
+			@RequestParam(value="name") String name,
+			@RequestParam(value="description") String description,
+			@RequestParam(value="price") int price,
+			@RequestParam(value="pic") MultipartFile file,
+			@RequestParam(value="window") int window,
+			HttpSession session){
+		DishBean db = new DishBean();
+		db.setId(id);
+		db.setDescription(description);
+		db.setName(name);
+		db.setPrice(price);
+		
+		return null;
+	}
 	
 	/**
 	 * 添加菜的WEB接口，不推荐，推荐通过ajax调用REST接口
@@ -55,19 +90,14 @@ public class WebRestaurantController {
 			@RequestParam(value="price") int price,
 			@RequestParam(value="pic") MultipartFile file,
 			@RequestParam(value="window") int window,
-			@CookieValue(value="token", required=false) String token,
 			HttpSession session) {
-		if(token != null) {
-			if(token.equals((String)session.getAttribute("token"))) {
-				DishBean bean = new DishBean();
-				bean.setName(name);
-				bean.setDescription(description);
-				bean.setPrice(price);
-				bean.setWindow(window);
-				bean.setRestaurant(Integer.parseInt(restaurant));
-				service.addDish(bean, file);
-			}
-		}
+			DishBean bean = new DishBean();
+			bean.setName(name);
+			bean.setDescription(description);
+			bean.setPrice(price);
+			bean.setWindow(window);
+			bean.setRestaurant(Integer.parseInt(restaurant));
+			service.addDish(bean, file);
 		return "_adddish";
 	}
 	
